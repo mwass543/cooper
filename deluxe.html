@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deluxe Accommodation | Makuti Villas Kilifi</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background:#e6f2ef;
+      color: #2b2b2b;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #1f6f5b;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      border: 1px solid #1f6f5b;
+      color: #1f6f5b;
+    }
+
+    .btn-outline:hover {
+      background: #1f6f5b;
+      color: #fff;
+    }
+
+    header {
+      padding: 80px 20px;
+      text-align: center;
+      color:#ffe9e0;
+      position: relative;
+      overflow: hidden;
+      background: url('pic2.png') center/cover no-repeat;
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      min-height: 60vh;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color:#ffe9e0;
+    }
+
+    /* DELUXE DESCRIPTION */
+    .deluxe-description {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      text-align: center;
+      background: #fff;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item h3 {
+      margin: 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 0;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      font-size: 1.1rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-item:hover h3 {
+      opacity: 1;
+    }
+
+    .explore-btn-container {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    /* ROOM PRICES TABLE */
+    .room-prices {
+      width: 80%;
+      max-width: 600px;
+      margin: 40px auto;
+      border-collapse: collapse;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .room-prices th,
+    .room-prices td {
+      padding: 15px 20px;
+      text-align: left;
+      background: #fff;
+    }
+
+    .room-prices th {
+      background: #1f6f5b;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    .room-prices tr:nth-child(even) td {
+      background: #f2f2f2;
+    }
+
+    .room-prices tr:hover td {
+      background: #e0f7f1;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: #fff;
+      font-size: 40px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .book-buttons-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .book-buttons-group a {
+      padding: 12px 25px;
+    }
+
+    /* Footer */
+    footer{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  background:linear-gradient(to top,#1f6f5b 70%,#4cc36f 100%);
+  padding:60px 20px 40px;
+  color:#fff;
+}
+
+    footer .social-icons,
+    footer .payment-icons {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer .social-icons img,
+    footer .payment-icons img {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s ease;
+    }
+
+    footer .social-icons img:hover,
+    footer .payment-icons img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+<header id="heroHeader">
+
+  <!-- Background Video (disabled: file not found) -->
+  <!-- <video autoplay muted loop playsinline style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 0;
+  ">
+    <source src="slideshow (2).mp4" type="video/mp4">
+  </video> -->
+
+  <!-- Overlay -->
+  <div style="
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+  "></div>
+
+  <div style="position: relative; z-index: 2;">
+    <a href="hotel.html" class="btn btn-outline" style="margin-bottom: 15px;">← Back to Home</a>
+    <h1>Book Your Stay at Makuti Villas</h1>
+    <p>Select your room, explore our amenities, and enjoy a serene coastal escape in Kilifi.</p>
+  </div>
+
+</header>
+
+<!-- DELUXE DESCRIPTION -->
+<section class="deluxe-description">
+ <p>
+  Designed for extended stays, our Deluxe Accommodation combines modern comfort with the relaxed charm of coastal living. Each villa is thoughtfully furnished with high-speed Wi-Fi, spacious living and working areas, and a fully equipped kitchen — giving you the flexibility to work productively, unwind comfortably, or host with ease. 
+
+  Set within lush gardens and just moments from Kilifi’s coastal attractions, the atmosphere offers a refreshing balance between focus and leisure. Wake up to quiet mornings surrounded by greenery, spend laid-back afternoons by the pool, and enjoy evenings preparing meals in your private kitchen or exploring nearby dining spots. 
+
+  Every detail is curated to ensure your stay feels effortless, private, and memorable.
+</p>
+</section>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img" src="" alt="Enlarged View">
+</div>
+
+<div class="book-buttons-group">
+  <a href="https://wa.me/+254734873704" target="_blank" class="btn btn-primary">Book 3 B/R Apartment</a>
+  <a href="https://wa.me/254734873704" target="_blank" class="btn btn-primary">Book 1 B/R Apartment</a>
+</div>
+
+<!-- ROOM PRICES TABLE -->
+<section class="room-section">
+  <h2 style="text-align:center; margin-bottom:20px;">Deluxe Room Prices</h2>
+  <table class="room-prices">
+    <tr>
+      <th>Room Type</th>
+      <th>Price per Night</th>
+      <th>Monthly Rate</th>
+    </tr>
+    <tr>
+      <td>3 B/R Apartment (Deluxe)</td>
+      <td>10,000 KES</td>
+      <td>50,000 KES (water incl., electricity per consumption)</td>
+    </tr>
+    <tr>
+      <td>1 B/R Apartment (Deluxe)</td>
+      <td>8,000 KES</td>
+      <td>25,000 KES</td>
+    </tr>
+  </table>
+</section>
+<!-- GALLERY SECTION -->
+<section class="gallery">
+
+  <!-- Existing Images -->
+  <div class="gallery-item" onclick="openLightbox('bed (6).jpg')">
+    <img src="bed (6).jpg" alt="Deluxe Bed">
+    <h3>Bedroom</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('hallway.jpg')">
+    <img src="hallway.jpg" alt="Hallway">
+    <h3>Hallway</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('kitchen (2).jpg')">
+    <img src="kitchen (2).jpg" alt="Kitchen">
+    <h3>Kitchen</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('living room.jpg')">
+    <img src="living room.jpg" alt="Living Room">
+    <h3>Living Area</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('outside (2).jpg')">
+    <img src="outside (2).jpg" alt="Exterior View">
+    <h3>Exterior</h3>
+  </div>
+
+  <!-- Newly Added Images -->
+  <div class="gallery-item" onclick="openLightbox('bedroom (2).jpg')">
+    <img src="bedroom (2).jpg" alt="Bedroom View 2">
+    <h3>Bedroom View</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('mirror.jpg')">
+    <img src="mirror.jpg" alt="Interior Detail">
+    <h3>Interior Detail</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('outside (3).jpg')">
+    <img src="outside (3).jpg" alt="Exterior View 2">
+    <h3>Exterior View</h3>
+  </div>
+
+  <div class="gallery-item" onclick="openLightbox('parking-lot.jpg')">
+    <img src="parking l;pot.jpg" alt="Parking Area">
+    <h3>Secure Parking</h3>
+  </div>
+
+</section>
+<!-- AC OPTION -->
+<section class="room-section" style="max-width:1000px; margin:60px auto; padding:0 20px; text-align:center;">
+  <h2>Air Conditioning Option</h2>
+  <p class="description" style="max-width:750px; margin:20px auto 30px; color:#555;">Upgrade your stay with air conditioning for an additional KES 6,000 per stay.</p>
+  <a href="https://wa.me/254734873704" target="_blank" class="btn btn-primary">Book with AC</a>
+</section>
+
+<footer style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start;">
+  <div style="flex:1; min-width:150px; display:flex; align-items:center;">
+    <img src="logo (2).jpg" alt="Makuti Villas Logo" style="max-width:120px; height:auto;">
+  </div>
+
+  <div style="flex:1; min-width:250px; display:flex; flex-direction:column; align-items:center; gap:20px;">
+    <p>© 2026 Makuti Villas Kilifi</p>
+    <p>Payment Methods</p>
+    <div class="payment-icons" style="display:flex; gap:10px;">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/visa.png" alt="Visa">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/mastercard.png" alt="Mastercard">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/mpesa.png" alt="Mpesa">
+    </div>
+    <p>Follow Us</p>
+    <div class="social-icons" style="display:flex; gap:10px;">
+      <a href="https://www.instagram.com/makuti_villas_kilifi" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" style="width:25px;height:25px;">
+      </a>
+      <a href="https://www.facebook.com/makutivillaskilifi" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook" style="width:25px;height:25px;">
+      </a>
+      <a href="https://wa.me/" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" style="width:25px;height:25px;">
+      </a>
+    </div>
+  </div>
+
+  <div style="flex:1; min-width:250px; text-align:right;">
+    <p>Phone: <a href="tel:+254792200599" style="color:#fff;">+254 792 200 599</a> / <a href="tel:+254734873704" style="color:#fff;">+254 734 873 704</a></p>
+    <p>Email: <a href="mailto:info@makutivillas.com" style="color:#fff;">info@makutivillas.com</a></p>
+    <p>Postal: P.O BOX 405-80108, KILIFI - KENYA</p>
+  </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+<!-- Header slideshow script -->
+<script>
+  (function() {
+    const header = document.getElementById('heroHeader');
+    if (!header) return;
+    const images = [
+      'bed (6).jpg',
+      'hallway.jpg',
+      'kitchen (2).jpg',
+      'living room.jpg',
+      'outside (2).jpg'
+    ];
+    let idx = 0;
+
+    // preload images
+    images.forEach(src => { const i = new Image(); i.src = src; });
+
+    function setBg(i) {
+      header.style.backgroundImage = `url("${images[i]}")`;
+      header.style.backgroundSize = 'cover';
+      header.style.backgroundPosition = 'center';
+    }
+
+    setBg(idx);
+    setInterval(() => {
+      idx = (idx + 1) % images.length;
+      setBg(idx);
+    }, 4000);
+  })();
+</script>
+
+</body>
+</html>

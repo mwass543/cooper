@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Economy Rooms | Makuti Villas Kilifi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#e6f2ef; color:#2b2b2b; line-height:1.6; }
+h1,h2 { font-family:'Playfair Display',serif; }
+a { text-decoration:none; color:inherit; }
+.btn { display:inline-block; padding:12px 26px; border-radius:30px; font-weight:500; transition:all 0.3s ease; cursor:pointer; }
+.btn-primary { background:#1f6f5b; color:#fff; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
+.btn-outline { border:2px solid #fff; color:#fff; }
+.btn-outline:hover { background:#fff; color:#1f6f5b; }
+
+header {
+  background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('single room.jpg') center/cover no-repeat;
+  padding:100px 20px;
+  text-align:center;
+  color:#fff;
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
+  transition: background-image 1s ease-in-out;
+}
+header h1 { margin-bottom:10px; font-size:2.8rem; }
+header p { color:#f0f0f0; max-width:700px; margin:10px auto 20px; font-size:1.1rem; }
+
+.room-section { max-width:1000px; margin:60px auto; padding:0 20px; text-align:center; opacity:0; transform:translateY(30px); transition:all 0.8s ease; }
+.room-section.visible { opacity:1; transform:translateY(0); }
+.room-section p.description { max-width:750px; margin:20px auto 30px; color:#555; }
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; margin-bottom:25px; }
+.gallery img { width:100%; height:220px; object-fit:cover; border-radius:18px; cursor:pointer; transition:transform 0.3s ease; }
+.gallery img:hover { transform:scale(1.05); }
+
+.room-prices { width:80%; max-width:500px; margin:20px auto 60px; border-collapse:collapse; box-shadow:0 10px 30px rgba(0,0,0,0.05); border-radius:12px; overflow:hidden; }
+.room-prices th, .room-prices td { padding:15px 20px; text-align:left; background:#fff; }
+.room-prices th { background:#1f6f5b; color:#fff; font-size:1.1rem; }
+.room-prices tr:nth-child(even) td { background:#f2f2f2; }
+.room-prices tr:hover td { background:#e0f7f1; }
+
+.amenities-list { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:20px 0 30px; }
+.amenity-tag { background:#e0f7f1; color:#1f6f5b; padding:8px 18px; border-radius:20px; font-size:0.9rem; font-weight:500; }
+
+.cta-banner { background:#1f6f5b; color:#fff; text-align:center; padding:60px 20px; border-radius:30px; margin:60px 20px; }
+.cta-banner h2 { margin-bottom:10px; }
+.cta-banner p { margin:10px 0 20px; }
+
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;width:100vw;position:relative;left:50%;transform:translateX(-50%);box-sizing:border-box;background:linear-gradient(to top,#1f6f5b 70%,#4cc36f 100%);padding:60px 20px 40px;color:#fff;}
+footer .social-icons, footer .payment-icons { display:flex; justify-content:center; gap:15px; margin:12px 0; flex-wrap:wrap; }
+footer img { width:32px; height:32px; filter:brightness(0) invert(1); transition:transform 0.3s ease; }
+footer img:hover { transform:scale(1.2); }
+footer .logo-img { filter:none; width:auto; height:auto; }
+
+/* LIGHTBOX */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:9999; }
+.lightbox img { max-width:90%; max-height:80%; border-radius:18px; }
+.close-lightbox { position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; }
+
+.divider { height:3px; background:linear-gradient(to right,transparent,#1f6f5b,transparent); margin:10px auto; max-width:200px; border-radius:2px; }
+</style>
+</head>
+
+<body>
+
+<header id="heroHeader">
+  <a href="book.html" class="btn btn-outline" style="margin-bottom:15px;">&larr; Back to Bookings</a>
+  <h1>Economy Rooms</h1>
+  <p>Comfortable, affordable stays with Bed & Breakfast included — perfect for budget-conscious travellers seeking a restful coastal experience at Makuti Villas.</p>
+</header>
+
+<!-- ECONOMY SINGLE ROOM -->
+<section class="room-section">
+  <h2>Economy Single Room bed and breakfast</h2>
+  <div class="divider"></div>
+  <p class="description">
+    Our Economy Single Room is designed with solo travellers in mind, offering a cozy and well-appointed space that balances simplicity with comfort. Enjoy clean, thoughtfully furnished interiors, soft bedding, and all the essentials for a restful night's sleep. Wake up each morning to a wholesome breakfast included with your stay, setting the perfect tone for a day of exploration or relaxation along the beautiful Kilifi coastline. Ideal for those who value great value without compromising on quality.
+  </p>
+  <div class="gallery">
+    <img src="single room.jpg" alt="Economy Single Room Interior" onclick="openLightbox(this.src)">
+    <img src="bathroom (3).jpg" alt="Economy Single Room Bathroom" onclick="openLightbox(this.src)">
+    <img src="mirror (2).jpg" alt="Economy Single Room Mirror" onclick="openLightbox(this.src)">
+  </div>
+  <div class="amenities-list">
+    <span class="amenity-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+    <span class="amenity-tag"><i class="fas fa-utensils"></i> Breakfast Included</span>
+    <span class="amenity-tag"><i class="fas fa-bath"></i> Private Bathroom</span>
+    <span class="amenity-tag"><i class="fas fa-bed"></i> Single Bed</span>
+    <span class="amenity-tag"><i class="fas fa-water"></i> Hot Water</span>
+    <span class="amenity-tag"><i class="fas fa-fan"></i> Ceiling Fan</span>
+  </div>
+  <a href="https://wa.me/254734873704?text=Hello%2C%20I%20would%20like%20to%20book%20an%20Economy%20Single%20Room%20at%20Makuti%20Villas." target="_blank" class="btn btn-primary">Book Single Room Bed & Breakfast — KES 2,500/night</a>
+</section>
+
+<!-- ECONOMY DOUBLE ROOM -->
+<section class="room-section">
+  <h2>Economy Double Room</h2>
+  <div class="divider"></div>
+  <p class="description">
+    Perfect for couples or friends travelling together, our Economy Double Room offers a spacious and inviting environment without stretching the budget. The room features a comfortable double bed, clean modern furnishings, and a relaxed coastal atmosphere that makes settling in effortless. Breakfast is included with every stay, giving you a warm and nourishing start to each day. Whether you're here for a short getaway or a longer coastal escape, the Economy Double Room provides everything you need for a pleasant and memorable stay at Makuti Villas.
+  </p>
+  <div class="gallery">
+    <img src="double bed (3).jpg" alt="Economy Double Room Interior" onclick="openLightbox(this.src)">
+    <img src="bathroom (4).jpg" alt="Economy Double Room Bathroom" onclick="openLightbox(this.src)">
+    <img src="wardrobe (2).jpg" alt="Economy Double Room Wardrobe" onclick="openLightbox(this.src)">
+  </div>
+  <div class="amenities-list">
+    <span class="amenity-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+    <span class="amenity-tag"><i class="fas fa-utensils"></i> Breakfast Included</span>
+    <span class="amenity-tag"><i class="fas fa-bath"></i> Private Bathroom</span>
+    <span class="amenity-tag"><i class="fas fa-bed"></i> Double Bed</span>
+    <span class="amenity-tag"><i class="fas fa-water"></i> Hot Water</span>
+    <span class="amenity-tag"><i class="fas fa-fan"></i> Ceiling Fan</span>
+  </div>
+  <a href="https://wa.me/254734873704?text=Hello%2C%20I%20would%20like%20to%20book%20an%20Economy%20Double%20Room%20at%20Makuti%20Villas." target="_blank" class="btn btn-primary">Book Double Room Bed & Breakfast — KES 3,000/night</a>
+</section>
+
+<!-- ROOM PRICES TABLE -->
+<section class="room-section">
+  <h2>Room Rates</h2>
+  <div class="divider"></div>
+  <table class="room-prices">
+    <tr>
+      <th>Room Type</th>
+      <th>Price per Night (KES)</th>
+    </tr>
+    <tr>
+      <td>Economy Single (Bed & Breakfast)</td>
+      <td>2,500</td>
+    </tr>
+    <tr>
+      <td>Economy Double (Bed & Breakfast)</td>
+      <td>3,000</td>
+    </tr>
+    <tr>
+      <td>Extra Person</td>
+      <td>1,500</td>
+    </tr>
+    <tr>
+      <td>Children below 5 years</td>
+      <td>Free bed </td>
+    </tr>
+    <tr>
+      <td>Children 6–12 years bed & breakfast</td>
+      <td>1,000</td>
+    </tr>
+  </table>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Ready to Book Your Stay?</h2>
+  <p>Contact us directly via WhatsApp or phone for the fastest and easiest reservation experience.</p>
+  <a href="https://wa.me/254734873704" target="_blank" class="btn" style="background:#fff;color:#1f6f5b;margin-right:10px;"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="close-lightbox" id="close-lightbox">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start;">
+  <div style="flex:1; min-width:150px; display:flex; align-items:center;">
+    <img src="logo (2).jpg" alt="Makuti Villas Logo" class="logo-img" style="max-width:120px; height:auto;">
+  </div>
+
+  <div style="flex:1; min-width:250px; display:flex; flex-direction:column; align-items:center; gap:20px;">
+    <p>© 2026 Makuti Villas Kilifi</p>
+    <p>Payment Methods</p>
+    <div class="payment-icons" style="display:flex; gap:10px;">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/visa.png" alt="Visa">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/mastercard.png" alt="Mastercard">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/mpesa.png" alt="Mpesa">
+    </div>
+    <p>Follow Us</p>
+    <div class="social-icons" style="display:flex; gap:10px;">
+      <a href="https://www.instagram.com/makuti_villas_kilifi" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" style="width:25px;height:25px;">
+      </a>
+      <a href="https://www.facebook.com/makutivillaskilifi" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook" style="width:25px;height:25px;">
+      </a>
+      <a href="https://wa.me/254734873704" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" style="width:25px;height:25px;">
+      </a>
+    </div>
+  </div>
+
+  <div style="flex:1; min-width:250px; text-align:right;">
+    <p>Phone: <a href="tel:+254792200599" style="color:#fff;">+254 792 200 599</a> / <a href="tel:+254734873704" style="color:#fff;">+254 734 873 704</a></p>
+    <p>Email: <a href="mailto:info@makutivillas.com" style="color:#fff;">info@makutivillas.com</a></p>
+    <p>Postal: P.O BOX 405-80108, KILIFI - KENYA</p>
+  </div>
+</footer>
+
+<script>
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightbox').style.display = 'flex';
+    document.getElementById('lightbox-img').src = src;
+  }
+  document.getElementById('close-lightbox').onclick = () => document.getElementById('lightbox').style.display = 'none';
+  document.getElementById('lightbox').onclick = e => { if (e.target === document.getElementById('lightbox')) document.getElementById('lightbox').style.display = 'none'; };
+
+  // Scroll animation
+  const sections = document.querySelectorAll('.room-section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  sections.forEach(section => observer.observe(section));
+
+  // Header slideshow
+  (function() {
+    const header = document.getElementById('heroHeader');
+    if (!header) return;
+    const images = [
+      'single room.jpg',
+      'single room (2).jpg',
+      'double bed.jpg',
+      'double bed (2).jpg',
+      'single room (4).jpg',
+      'single room (5).jpg'
+    ];
+    let idx = 0;
+    images.forEach(s => { const i = new Image(); i.src = s; });
+    function setBg(i) {
+      header.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url("${images[i]}")`;
+      header.style.backgroundSize = 'cover';
+      header.style.backgroundPosition = 'center';
+    }
+    setBg(idx);
+    setInterval(() => { idx = (idx + 1) % images.length; setBg(idx); }, 4000);
+  })();
+</script>
+
+</body>
+</html>

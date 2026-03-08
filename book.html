@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Stay | Makuti Villas Kilifi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Inter', sans-serif; background:#e6f2ef; margin:0; color:#2b2b2b; }
+h1,h2,h3 { font-family:'Playfair Display', serif; }
+a { text-decoration:none; color:inherit; }
+
+.btn { padding:12px 26px; border-radius:25px; cursor:pointer; transition:0.3s; border:none; display:inline-block; }
+.btn-primary { background:#1f6f5b; color:#fff; }
+.btn-primary:hover { transform:translateY(-3px) scale(1.02); }
+.btn-outline { border:1px solid #1f6f5b; color:#1f6f5b; background:transparent; }
+
+header { background:url('pic2.png') center/cover no-repeat; padding:90px 20px; color:#fff; text-align:center; }
+
+.rooms { max-width:1100px; margin:60px auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:30px; padding:0 20px; }
+
+.room { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.05); text-align:center; display:flex; flex-direction:column; }
+.room img { width:100%; height:200px; object-fit:cover; }
+.room-content { padding:25px; flex-grow:1; display:flex; flex-direction:column; justify-content:space-between; }
+.room-content p { margin:15px 0; }
+
+.bottom-cta { text-align:center; margin:60px 20px; }
+
+/* MODALS */
+.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:999; opacity:0; transition:opacity 0.3s ease; }
+.modal.show { display:flex; opacity:1; }
+.modal-content { background:#fff; padding:30px; border-radius:20px; width:90%; max-width:500px; max-height:80vh; overflow-y:auto; transform: scale(0.9); transition: transform 0.3s ease; }
+.modal.show .modal-content { transform: scale(1); }
+
+input, select, textarea { width:100%; padding:14px; margin-bottom:12px; border-radius:14px; border:1px solid #ccc; }
+
+.total-price { font-weight:600; text-align:center; margin:12px 0; font-size:1.1rem; }
+
+#card-section, #mpesa-section { display:none; margin-top:15px; }
+#card-element { padding:12px; border:1px solid #ccc; border-radius:12px; }
+#card-errors { color:red; font-size:0.85rem; margin-top:8px; }
+
+/* AVAILABILITY TABLE */
+#availabilityResults table {
+    margin: 20px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 90%;
+    max-width: 600px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    overflow: hidden;
+}
+#availabilityResults th {
+    background-color: #1f6f5b;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px;
+    text-align: center;
+}
+#availabilityResults td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+#availabilityResults tr:last-child td {
+    border-bottom: none;
+}
+#availabilityResults tr:hover {
+    background-color: rgba(31,111,91,0.1);
+    transition: background-color 0.2s;
+}
+#availabilityResults { text-align:center; margin-top:20px; font-size:1rem; }
+
+/* TOAST */
+/* TOAST */
+.toast { position: fixed; bottom:-60px; left:50%; transform:translateX(-50%); padding:12px 20px; border-radius:12px; color:#fff; font-weight:600; z-index:1000; opacity:0; transition: bottom 0.4s ease, opacity 0.4s ease; }
+.toast.show { bottom:30px; opacity:1; }
+.toast.success { background:#28a745; }
+.toast.error { background:#dc3545; }
+.toast.info { background:#1f6f5b; }
+
+/* MODAL CLOSE BUTTON */
+.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: #1f6f5b; font-weight: bold; padding: 0; width: 30px; height: 30px; }
+.modal-close:hover { color: #d32f2f; }
+
+/* CONFIRMATION MODAL */
+.confirmation-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1001; }
+.confirmation-modal.show { display: flex; }
+.confirmation-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 450px; text-align: center; }
+.confirmation-content h2 { color: #28a745; margin-bottom: 15px; font-size: 1.8rem; }
+.confirmation-content .booking-ref { background: #f0f0f0; padding: 15px; border-radius: 8px; font-family: monospace; font-weight: 600; margin: 20px 0; word-break: break-all; }
+.confirmation-content p { color: #666; margin-bottom: 15px; }
+
+/* CHECKBOX STYLING */
+input[type="checkbox"] { width: auto; margin-right: 8px; }
+.checkbox-label { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
+
+/* Footer (hotel style) */
+footer{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  background:linear-gradient(to top,#1f6f5b 70%,#4cc36f 100%);
+  padding:60px 20px 40px;
+  color:#fff;
+}
+
+</style>
+</head>
+<body>
+
+<header id="heroHeader">
+  <a href="hotel.html" class="btn btn-outline">← Back to Home</a>
+  <h1>Book Your Stay at Makuti Villas</h1>
+  <p>Your coastal escape starts here.</p>
+</header>
+
+<p style="max-width:900px;margin:40px auto;text-align:center;padding:0 20px;">
+Welcome to Makuti Villas, a serene coastal retreat where the timeless charm of Makuti thatch meets contemporary elegance. Lounge by our sparkling pool, meander through lush, fragrant gardens, or let the kids explore our playful spaces while you unwind. Savor delicious meals at our bar and restaurant, feel the gentle ocean breeze, and enjoy spacious villas and rooms designed for families, couples, or solo travelers. Every corner is crafted to balance comfort, style, and relaxation, turning every stay into an unforgettable escape from the everyday.
+</p>
+
+<section class="rooms">
+  <div class="room">
+    <img src="single room.jpg" alt="Economy Single and Double Room">
+    <div class="room-content">
+      <h3>Economy Accommodation</h3>
+      <p>Start your day right with our cozy Economy Single and Double rooms, all inclusive of a wholesome breakfast. Ideal for budget-conscious travelers who still want a comfortable, restful stay. Enjoy a clean, well-furnished room with all the essentials and wake up to a fresh morning meal — the perfect blend of value and comfort at Makuti Villas.</p>
+      <p><strong>Single:</strong> KES 2,500/night &nbsp;|&nbsp; <strong>Double:</strong> KES 3,000/night</p>
+      <a href="economy.html" class="btn btn-primary">View Rooms</a>
+    </div>
+  </div>
+
+  <div class="room">
+    <img src="outside room.jpg" alt="Standard Accommodation">
+    <div class="room-content">
+      <h3>Standard Accommodation</h3>
+      <p>Unwind in our thoughtfully designed single and double rooms, where comfort meets simplicity. Each room offers a cozy, relaxing atmosphere with all the essentials for a restful stay. Perfect for solo travelers, couples, or short getaways, every space is crafted for convenience and ease. At Makuti Villas, our standard accommodations provide a welcoming retreat after a day of adventure or work.</p>
+      <a href="standard.html" class="btn btn-primary">Explore</a>
+    </div>
+  </div>
+
+  <div class="room">
+    <img src="bed (3).jpg" alt="Deluxe Accommodation">
+    <div class="room-content">
+      <h3>Deluxe Accommodation</h3>
+      <p>Experience the ultimate in comfort and style with our deluxe apartments and villas, thoughtfully designed for families and extended stays. Spacious interiors, elegant décor, and modern amenities create a home-away-from-home experience. Relax in privacy while enjoying all the conveniences you need for a seamless stay. At Makuti Villas, every deluxe accommodation combines luxury, space, and comfort for an unforgettable visit.</p>
+      <a href="deluxe.html" class="btn btn-primary">Explore</a>
+    </div>
+  </div>
+
+  <div class="room">
+    <img src="bed (4).jpg" alt="Large Room Accommodation">
+    <div class="room-content">
+      <h3>Large Room Accommodation</h3>
+      <p>Enjoy the extra space and comfort of our Large Rooms, perfect for those who want a little more room to stretch out and relax. These generously sized rooms feature a comfortable double bed, modern furnishings, and all the amenities you need for a refreshing stay. Whether you're here for a romantic getaway or a solo retreat, our Large Rooms offer a spacious and tranquil environment at Makuti Villas.</p>
+      <p><strong>Single:</strong> KES 3,500/night &nbsp;|&nbsp; <strong>Double:</strong> KES 4,500/night</p>
+      <a href="large room.html" class="btn btn-primary">Explore</a>
+    </div>
+  </div>
+
+  <div class="room">
+    <img src="conference.jpg" alt="Conference Rooms">
+    <div class="room-content">
+      <h3>Conference Rooms</h3>
+      <p>
+Elevate your meetings, workshops, and special events at Makuti Villas with our versatile conference halls. Designed for groups of all sizes, each space combines modern facilities, stylish seating, and seamless connectivity to ensure productive sessions. Whether it’s a corporate gathering, training, or celebration, our halls offer a professional yet comfortable atmosphere. Host your next event with us and leave a lasting impression on every guest.
+</p>
+      <a href="conference.html" class="btn btn-primary">Explore</a>
+    </div>
+  </div>
+
+  <div class="room">
+    <img src="pic1.png" alt="Amenities">
+    <div class="room-content">
+      <h3>Amenities</h3>
+      <p>Relax and unwind at Makuti Villas, where a sparkling swimming pool and lush gardens set the scene for your perfect getaway. Let the kids enjoy our dedicated play area while you take in the serene surroundings. With ample parking, convenience is never an issue, and our bar and restaurant ensure every meal and drink is a delight. Every corner is designed for comfort, fun, and unforgettable moments.</p>
+      <a href="amenities.html" class="btn btn-primary">Explore</a>
+    </div>
+  </div>
+</section>
+
+<div class="bottom-cta">
+  <button type="button" class="btn btn-primary" onclick="startBooking()" style="padding: 16px 40px; font-size: 1.1rem;">Book Now</button>
+</div>
+
+<!-- STEP-BY-STEP MODAL -->
+<div class="modal" id="paymentModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3 id="stepTitle">Step 1: Select Room/Service</h3>
+
+    <!-- STEP 1 -->
+    <div class="step" id="step1">
+      <select id="roomType">
+       <option value="economy single">Economy Single: 2,500 KES/night</option>
+      <option value="economy double">Economy Double: 3,000 KES/night</option>
+      <option value="Standard Single">Standard Accommodation – Single: 3,000 KES/night</option>
+      <option value="Standard Double">Standard Accommodation – Double: 4,000 KES/night</option>
+      <option value="Large Single">Large Single Room: 3,500 KES/night</option>
+      <option value="Large Double">Large Double Room: 4,500 KES/night</option>
+      <option value="Deluxe 1BR">Deluxe 1-Bedroom Apartment – 8,000 KES/day</option>
+      <option value="Deluxe 3BR">Deluxe 3-Bedroom Apartment – 10,000 KES/day</option>
+      <option value="Day Room">Day Room (8am-6pm) – 2,000 KES/day</option>
+      <option value="Extra Guest">Extra Guest (6-12 years) – 1,000 KES/night</option>
+      <option value="Extra Guest">Extra Guest (12+ years) – 1,500 KES/night</option>
+      <option value="deluxe self catering single/double">Deluxe Self-Catering Single/Double – 5,000 KES/night</option>
+      <option value="Conference Small">Conference Small Hall – 2,500 KES/day</option>
+      <option value="Conference Medium">Conference Medium Hall – 3,500 KES/day</option>
+      <option value="Conference Big">Conference Big Hall – 6,000 KES/day</option>
+      <option value="Amenities">Swimming Pool – 300 KES/day</option>
+      </select>
+      <button class="btn btn-primary" onclick="nextStep(2)">Next</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step2" style="display:none;">
+      <input type="number" id="nights" placeholder="Number of nights/days" min="1" value="1">
+      <input type="text" id="fullName" placeholder="Full Name">
+      <input type="email" id="email" placeholder="Email">
+      <input type="tel" id="phone" placeholder="Phone (optional)">
+      <input type="date" id="checkIn">
+      <input type="date" id="checkOut">
+      <input type="number" id="guests" placeholder="Number of Guests" min="1" value="1">
+      <textarea id="message" placeholder="Message (optional)"></textarea>
+      <div class="total-price" id="totalPrice">Total: KES 0</div>
+      <button class="btn btn-outline" onclick="prevStep(1)">Back</button>
+      <button class="btn btn-primary" onclick="nextStep(3)">Next</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step3" style="display:none;">
+      <p style="text-align: center; margin-bottom: 20px; line-height: 1.6;">
+        Thank you for providing your details! To complete your booking, please contact us via WhatsApp so we can confirm availability and finalize your reservation.
+      </p>
+      <button class="btn btn-primary" style="width:100%; margin-bottom:15px;" onclick="sendToWhatsApp()">Send Details to WhatsApp</button>
+
+      <button class="btn btn-outline" onclick="prevStep(2)">Back</button>
+    </div>
+
+  </div>
+</div>
+
+<footer style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start;">
+  <div style="flex:1; min-width:150px; display:flex; align-items:center;">
+    <img src="logo (2).jpg" alt="Makuti Villas Logo" style="max-width:120px; height:auto;">
+  </div>
+
+  <div style="flex:1; min-width:250px; display:flex; flex-direction:column; align-items:center; gap:20px;">
+    <p>© 2026 Makuti Villas Kilifi</p>
+    <p>Payment Methods</p>
+    <div class="payment-icons" style="display:flex; gap:10px;">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/visa.png" alt="Visa">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/mastercard.png" alt="Mastercard">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/mpesa.png" alt="Mpesa">
+    </div>
+    <p>Follow Us</p>
+    <div class="social-icons" style="display:flex; gap:10px;">
+      <a href="https://www.instagram.com/makuti_villas_kilifi" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" style="width:25px;height:25px;">
+      </a>
+      <a href="https://www.facebook.com/makutivillaskilifi" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook" style="width:25px;height:25px;">
+      </a>
+      <a href="https://wa.me/" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" style="width:25px;height:25px;">
+      </a>
+    </div>
+  </div>
+
+  <div style="flex:1; min-width:250px; text-align:right;">
+    <p>Phone: <a href="tel:+254792200599" style="color:#fff;">+254 792 200 599</a> / <a href="tel:+254734873704" style="color:#fff;">+254 734 873 704</a></p>
+    <p>Email: <a href="mailto:info@makutivillas.com" style="color:#fff;">info@makutivillas.com</a></p>
+    <p>Postal: P.O BOX 405-80108, KILIFI - KENYA</p>
+  </div>
+</footer>
+
+<!-- BOOKING CONFIRMATION MODAL -->
+<div class="confirmation-modal" id="confirmationModal">
+  <div class="confirmation-content">
+    <h2>✓ Booking Confirmed!</h2>
+    <p>Your booking has been successfully created.</p>
+    <div class="booking-ref" id="bookingRefDisplay"></div>
+    <p>A confirmation email has been sent to your email address.</p>
+    <button class="btn btn-primary" onclick="closeConfirmation()">Done</button>
+  </div>
+</div>
+
+<script>
+// Redirect to WhatsApp for booking
+function startBooking() {
+  const phone = '254734873704';
+  const message = 'Hello, I\'m interested in booking a room or service at Makuti Villas. Could you please provide available options and pricing?';
+  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.location.href = waUrl;
+}
+</script>
+
+
+<!-- Header slideshow script -->
+<script>
+  (function() {
+    const header = document.getElementById('heroHeader');
+    if (!header) return;
+    const images = [
+      'outside room.jpg',
+      'bed (6).jpg',
+      'pic8.png',
+      'conference (4).jpg'
+    ];
+    let idx = 0;
+    images.forEach(src => { const i=new Image(); i.src = src; });
+    function setBg(i){ header.style.backgroundImage = `url("${images[i]}")`; header.style.backgroundSize='cover'; header.style.backgroundPosition='center'; }
+    setBg(idx);
+    setInterval(()=>{ idx=(idx+1)%images.length; setBg(idx); }, 4000);
+  })();
+</script>
+</body>
+</html>
