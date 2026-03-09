@@ -1,1 +1,768 @@
-<!DOCTYPE html>\n<html>\n<head>\n    <title>Makuti Villas</title>\n    <link rel="stylesheet" type="text/css" href="styles.css">\n</head>\n<body>\n    <header>\n        <h1>Welcome to Makuti Villas</h1>\n    </header>\n    <main>\n        <section>\n            <h2>Our Villas</h2>\n            <p>Experience luxury and serenity in our beautifully designed villas.</p>\n        </section>\n        <section>\n            <h2>Contact Us</h2>\n            <p>Email: info@makutivillas.com</p>\n            <p>Phone: +1234567890</p>\n        </section>\n    </main>\n    <footer>\n        <p>&copy; 2026 Makuti Villas</p>\n    </footer>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Makuti Villas Kilifi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:#2b2b2b;
+  background:#e0f7f1;
+  line-height:1.6;
+}
+a{text-decoration:none;color:inherit;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+
+.btn{
+  padding:14px 28px;
+  border-radius:30px;
+  background:#1f6f5b;
+  color:#fff;
+  display:inline-block;
+  transition:.3s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.2);}
+
+/* ===== HERO WITH SILHOUETTE CURVE ===== */
+.hero{
+  position:relative;
+  height:92vh;
+  width:100%;
+  background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url("pic2.png") center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:#fff;
+  padding:20px;
+  box-sizing:border-box;
+}
+.hero h1{font-size:3rem;margin-bottom:15px;}
+.hero p{max-width:650px;margin:0 auto 30px;font-size:1.1rem;}
+.hero .actions{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;}
+
+/* curved silhouette divider */
+.hero::after{
+  content:"";
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  width:100%;
+  height:140px;
+  background:#c9a27d;
+  clip-path:ellipse(75% 100% at 50% 100%);
+}
+
+/* ===== SILHOUETTE FLOW SECTIONS ===== */
+section{
+  padding:90px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* editorial block flows from hero curve */
+.editorial-intro{
+  background:#c9a27d;
+  padding-top:120px;
+}
+
+.editorial-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+  align-items:center;
+}
+.editorial-text h2{font-size:2.4rem;margin-bottom:20px;}
+.editorial-text p{margin-bottom:15px;color:#3f3f3f;}
+
+.editorial-images{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.editorial-images img{
+  width:100%;
+  border-radius:26px;
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  object-fit:cover;
+}
+
+/* wave silhouette between sections */
+.wave-divider{
+  width:100%;
+  height:120px;
+  background:#e0f7f1;
+  clip-path:ellipse(70% 100% at 50% 0%);
+}
+
+/* features cards */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+.feature{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+/* experience silhouette block */
+.experience{
+  background:#eef4f2;
+  border-radius:40px;
+  padding:80px 40px;
+  margin-top:40px;
+  text-align:center;
+}
+
+/* events */
+.events{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+.event-card{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+  text-align:center;
+}
+
+/* CTA curve */
+.cta{
+  text-align:center;
+  background:#1f6f5b;
+  color:#fff;
+  border-radius:40px;
+  padding:80px 20px;
+}
+
+    footer{
+  width:100%;
+  height:100%;
+  background:linear-gradient(to top,#1f6f5b 70%,#4cc36f 100%);
+  color:#fff;
+  padding:60px 0 40px;
+}
+
+.footer-container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:40px;
+}
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* FEATURED PHOTOS GALLERY */
+.featured-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.gallery-thumb {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-thumb:hover {
+  transform: scale(1.05);
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(31,111,91,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-thumb:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay-text {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* SOCIAL PROOF */
+.social-proof {
+  background: #eef4f2;
+  border-radius: 40px;
+  padding: 60px 40px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+
+/* STICKY QUICK BOOK BUTTON */
+.sticky-book-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #1f6f5b;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(31,111,91,0.3);
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 100;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.sticky-book-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sticky-book-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(31,111,91,0.4);
+}
+
+/* FEATURE LINKS */
+.feature {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature a {
+  color: #1f6f5b;
+  font-weight: 600;
+  margin-top: 10px;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.feature a:hover {
+  border-bottom-color: #1f6f5b;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero" id="heroHeader">
+  <div>
+    <h1>Welcome to Makuti Villas</h1>
+    <p>A relaxed tropical retreat in Kilifi where tradition, tranquility and comfort meet.</p>
+    <div class="actions">
+      <a href="book.html" class="btn">Book a Stay</a>
+    </div>
+  </div>
+</section>
+
+<section class="editorial-intro">
+  <div class="editorial-grid">
+    <div class="editorial-text">
+      <h2>Your Coastal Escape in Kilifi</h2>
+      <p>Rooted in authentic coastal tradition, thoughtfully designed for today’s traveler.
+Makuti Villas is more than just a place to stay — it’s your space to unwind, breathe deeply, and reconnect.
+Each room blends natural textures, open airy layouts, and calming interiors to create an atmosphere that feels grounded yet refined. From lazy mornings with coffee on your veranda to golden-hour evenings under the stars, every detail encourages rest and those quiet moments of joy.
+Whether you’re coming for a weekend retreat, a family getaway, or an extended stay in Kilifi, Makuti Villas offers a warm, welcoming environment where comfort, privacy, and tranquility come together seamlessly..</p>
+    </div>
+    <div class="editorial-images">
+      <img src="pic3.png" onclick="openLightbox('pic3.png')" style="cursor: pointer;">
+      <img src="bed (3).jpg" onclick="openLightbox('bed (3).jpg')" style="cursor: pointer;">
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider"></div>
+<section>
+
+  <p>At Makuti Villas, every stay is designed to offer comfort, flexibility, and a touch of coastal charm. Guests can select from our Single and Double Standard Rooms, stylish Deluxe Rooms, or spacious 2-Bedroom and 3-Bedroom Self-Catering Villas perfect for longer stays or group travel. Our accommodation rates include bed and breakfast options, with additional arrangements available for extra guests and convenient day room use. Families are warmly welcomed with special considerations for young children and those between six and twelve years. Explore our rack rates below and discover the relaxing Makuti experience waiting for you.</p>
+
+</section>
+
+<!-- Your sections with IDs for anchor links -->
+<section id="accommodation-rates" class="rates">
+  <h2>Accommodation Rack Rates</h2>
+ <table class="rates-table">
+  <tr>
+    <th>Description</th>
+    <td>Economy Single (Bed & Breakfast)</td>
+    <td>Economy Double (Bed & Breakfast)</td>
+    <td>Standard Single (Bed & Breakfast)</td>
+    <td>Standard Double (Bed & Breakfast)</td>
+    <td>Large Single (Bed & Breakfast)</td>
+    <td>Large Double (Bed & Breakfast)</td>
+    <td>Deluxe Room 61,51,53 (Bed & Breakfast)</td>
+    <td>Deluxe Room 84 (Self Catering)</td>
+  </tr>
+
+  <tr>
+    <th>Unit</th>
+    <td>1 Pax</td>
+    <td>2 Pax</td>
+    <td>1 Pax</td>
+    <td>2 Pax</td>
+    <td>1 Pax</td>
+    <td>2 Pax</td>
+    <td>2 Pax</td>
+    <td>2 Pax</td>
+  </tr>
+
+  <tr>
+    <th>Rate (Kshs/Night)</th>
+    <td>2,500</td>
+    <td>3,000</td>
+    <td>3,000</td>
+    <td>4,000</td>
+    <td>3,500</td>
+    <td>4,500</td>
+    <td>6,500</td>
+    <td>5,000</td>
+  </tr>
+</table>
+</section>
+
+<section class="important-info">
+  <h2>Important Information</h2>
+
+  <h3>Extra Charges</h3>
+  <ul>
+    <li>Extra person (Bed & Breakfast): Ksh 1,500</li>
+    <li>Day Room: Ksh 1,000</li>
+    <li>Self-Catering Villas: Ksh 5,000 per night</li>
+  </ul>
+
+  <h3>Children Policy</h3>
+  <ul>
+    <li>Children below 5 years: Free stay (bed only)</li>
+    <li>Children between 6–12 years: Ksh 1,000 (Bed & Breakfast)</li>
+  </ul>
+
+  <h3>Check-In</h3>
+  <p>Check-in is available from 10:00 AM.</p>
+
+  <h3>Parking</h3>
+  <p>Free parking is available for all hotel guests.</p>
+</section>
+
+<section>
+  <h2 style="text-align:center; margin-bottom:40px;">Featured Highlights</h2>
+  <div class="featured-gallery">
+    <div class="gallery-thumb" onclick="openLightbox('pool (6).jpg')">
+      <img src="pool (6).jpg" alt="Swimming Pool">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Click to View</span></div>
+    </div>
+    <div class="gallery-thumb" onclick="openLightbox('bed (2).jpg')">
+      <img src="bed (2).jpg" alt="Luxurious Bedroom">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Click to View</span></div>
+    </div>
+    <div class="gallery-thumb" onclick="openLightbox('garden.jpg')">
+      <img src="garden.jpg" alt="Lush Gardens">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Click to View</span></div>
+    </div>
+    <div class="gallery-thumb" onclick="openLightbox('bar.jpg')">
+      <img src="bar.jpg" alt="Bar & Restaurant">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">Click to View</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="features">
+    <div class="feature">
+      <h3>Comfortable Stays</h3>
+      <p>Cozy private rooms.</p>
+      <a href="standard.html">Explore Standard Rooms →</a>
+    </div>
+    <div class="feature">
+      <h3>Poolside Living</h3>
+      <p>Relax in the sun.</p>
+      <a href="deluxe.html">View Deluxe Apartments →</a>
+    </div>
+    <div class="feature">
+      <h3>Food & Drinks</h3>
+      <p>Fresh coastal meals.</p>
+      <a href="amenities.html">See Our Amenities →</a>
+    </div>
+    <div class="feature">
+      <h3>Events</h3>
+      <p>Weddings & celebrations.</p>
+      <a href="conference.html">Book Conference Spaces →</a>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section>
+  <h2>The Makuti Experience</h2>
+  <p>Wake up to slow, sun-washed coastal mornings, where fresh ocean air and quiet surroundings set the tone for the day. Spend your afternoons unwinding by the pool beneath swaying palms, then ease into magical evenings filled with warm breezes, soft lights, and unforgettable coastal calm.</p>
+</section>
+
+<section>
+  <h2 style="text-align:center;">Celebrate With Us</h2>
+  <div class="events">
+    <div class="event-card">
+      <h3>Weddings</h3>
+      <p>Create unforgettable memories on your special day. Our spacious venues, lush gardens, and professional services provide the perfect setting for your dream wedding ceremony or reception.</p>
+      <a href="#" id="planWeddingBtn" class="btn" style="margin-top:15px;">Plan Your Wedding</a>
+    </div>
+    <div class="event-card">
+      <h3>Birthdays</h3>
+      <p>Celebrate in style with friends and family. From intimate gatherings to grand parties, our flexible spaces, catering options, and relaxed atmosphere make every birthday special.</p>
+      <a href="#" id="bookCelebrationBtn" class="btn" style="margin-top:15px;">Book Your Celebration</a>
+    </div>
+    <div class="event-card">
+      <h3>Retreats</h3>
+      <p>Rejuvenate mind and body on the serene Kilifi coast. Perfect for corporate wellness retreats, team-building getaways, or personal reflection with stunning natural surroundings.</p>
+      <a href="#" id="reserveRetreatBtn" class="btn" style="margin-top:15px;">Reserve Your Retreat</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Your Kilifi Getaway Awaits</h2>
+</section>
+
+<!-- CHECK AVAILABILITY BUTTON -->
+<div style="text-align:center; margin:60px 0; padding:40px 20px; background:#f9f9f9;">
+  <h3 style="margin-bottom:20px; font-family:'Playfair Display',serif; font-size:1.8rem; color:#1f6f5b;">Check Room Availability</h3>
+  <div style="max-width:600px; margin:0 auto;">
+    <select id="roomType" style="width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc; font-size:1rem;">
+      <option value="">Select Room/Service</option>
+      <option value="economy single">Economy Single: 2,500 KES/night</option>
+      <option value="economy double">Economy Double: 3,000 KES/night</option>
+      <option value="Standard Single">Standard Accommodation – Single: 3,000 KES/night</option>
+      <option value="Standard Double">Standard Accommodation – Double: 4,000 KES/night</option>
+      <option value="Large Single">Large Single Room: 3,500 KES/night</option>
+      <option value="Large Double">Large Double Room: 4,500 KES/night</option>
+      <option value="Deluxe 1BR">Deluxe 1-Bedroom Apartment – 8,000 KES/day</option>
+      <option value="Deluxe 3BR">Deluxe 3-Bedroom Apartment – 10,000 KES/day</option>
+      <option value="Day Room">Day Room (8am-6pm) – 2,000 KES/day</option>
+      <option value="Extra Guest">Extra Guest (6-12 years) – 1,000 KES/night</option>
+      <option value="Extra Guest">Extra Guest (12+ years) – 1,500 KES/night</option>
+      <option value="deluxe self catering single/double">Deluxe Self-Catering Single/Double – 5,000 KES/night</option>
+      <option value="Conference Small">Conference Small Hall – 2,500 KES/day</option>
+      <option value="Conference Medium">Conference Medium Hall – 3,500 KES/day</option>
+      <option value="Conference Big">Conference Big Hall – 6,000 KES/day</option>
+      <option value="Amenities">Swimming Pool – 300 KES/day</option>
+    </select>
+    <input type="date" id="checkIn" style="width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc; font-size:1rem;" placeholder="Check-in Date">
+    <input type="date" id="checkOut" style="width:100%; padding:12px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc; font-size:1rem;" placeholder="Check-out Date">
+    <button id="checkAvailabilityBtn" class="btn" style="width:100%; margin-bottom:20px;">Check Availability</button>
+    <div id="availabilityResults" style="margin-top:20px;"></div>
+  </div>
+</div>
+<footer>
+  <div class="footer-container">
+
+    <div style="flex:1; min-width:150px;">
+      <img src="logo (2).jpg" alt="Makuti Villas Logo" style="max-width:120px;">
+    </div>
+
+    <div style="flex:1; min-width:250px; text-align:center;">
+      <p>© 2026 Makuti Villas Kilifi</p>
+
+      <p>Payment Methods</p>
+      <div class="payment-icons">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/visa.png">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/mastercard.png">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/mpesa.png">
+      </div>
+
+      <p>Follow Us</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/makuti_villas_kilifi" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png">
+        </a>
+        <a href="https://www.facebook.com/makutivillaskilifi" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png">
+        </a>
+        <a href="https://wa.me/254734873704" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png">
+        </a>
+      </div>
+    </div>
+
+    <div style="flex:1; min-width:250px; text-align:right;">
+      <p>Phone: +254 792 200 599 / +254 734 873 704</p>
+      <p>Email: info@makutivillas.com</p>
+      <p>Postal: P.O BOX 405-80108, Kilifi - Kenya</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- AVAILABILITY TABLE STYLES & SCRIPTS -->
+<style>
+#availabilityResults table {
+    margin: 20px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    max-width: 600px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    overflow: hidden;
+}
+#availabilityResults th {
+    background-color: #1f6f5b;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px;
+    text-align: center;
+}
+#availabilityResults td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+#availabilityResults tr:last-child td {
+    border-bottom: none;
+}
+#availabilityResults tr:hover {
+    background-color: rgba(31,111,91,0.1);
+    transition: background-color 0.2s;
+}
+
+.toast { position: fixed; bottom:-60px; left:50%; transform:translateX(-50%); padding:12px 20px; border-radius:12px; color:#fff; font-weight:600; z-index:1000; opacity:0; transition: bottom 0.4s ease, opacity 0.4s ease; }
+.toast.show { bottom:30px; opacity:1; }
+.toast.success { background:#28a745; }
+.toast.error { background:#dc3545; }
+.toast.info { background:#1f6f5b; }
+</style>
+
+<script>
+function showToast(message, type = "info") {
+  let toast = document.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.className = `toast show ${type}`;
+  setTimeout(() => toast.className = 'toast', 3500);
+}
+
+// Wire the Check Availability button
+const checkBtn = document.getElementById('checkAvailabilityBtn');
+if (checkBtn) {
+  checkBtn.addEventListener('click', async function() {
+    const roomTypeEl = document.getElementById('roomType');
+    const checkInEl = document.getElementById('checkIn');
+    const checkOutEl = document.getElementById('checkOut');
+
+    const frontendRoomType = roomTypeEl ? roomTypeEl.value : '';
+    const check_in = checkInEl ? checkInEl.value : '';
+    const check_out = checkOutEl ? checkOutEl.value : '';
+
+    if (!frontendRoomType || !check_in || !check_out) {
+      showToast('Please select room type and dates', 'info');
+      return;
+    }
+
+    try {
+     const phone = '254734873704';
+
+const message = `Hello Makuti Villas, I'd like to check availability for:
+
+Room/Service: ${frontendRoomType}
+Check-in: ${check_in}
+Check-out: ${check_out}
+
+Please confirm availability.`;
+
+const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+showToast('Opening WhatsApp...', 'info');
+window.location.href = waUrl;
+    } catch (e) {
+      console.error('WhatsApp redirect error', e);
+      showToast('Unable to open WhatsApp', 'error');
+    }
+  });
+}
+
+// Wire event buttons to WhatsApp
+function openWhatsAppFor(action) {
+  try {
+    const phone = '254734873704';
+    const message = `Hello, I'm interested in ${action}. Please advise availability and pricing. (Contact: 0792200599)`;
+    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.location.href = waUrl;
+  } catch (e) {
+    console.error('WhatsApp redirect error', e);
+    showToast('Unable to open WhatsApp', 'error');
+  }
+}
+
+document.getElementById('planWeddingBtn')?.addEventListener('click', function(e) {
+  e.preventDefault();
+  openWhatsAppFor('planning a wedding');
+});
+
+document.getElementById('bookCelebrationBtn')?.addEventListener('click', function(e) {
+  e.preventDefault();
+  openWhatsAppFor('booking a celebration');
+});
+
+document.getElementById('reserveRetreatBtn')?.addEventListener('click', function(e) {
+  e.preventDefault();
+  openWhatsAppFor('reserving a retreat');
+});
+
+// LIGHTBOX FUNCTIONS
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(event) {
+  if (event) event.stopPropagation();
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// STICKY QUICK BOOK BUTTON - Show after scrolling down 300px
+const stickyBookBtn = document.getElementById('stickyBookBtn');
+if (stickyBookBtn) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      stickyBookBtn.classList.add('visible');
+    } else {
+      stickyBookBtn.classList.remove('visible');
+    }
+  });
+}
+</script>
+
+<!-- Header slideshow script -->
+<script>
+  (function() {
+    const header = document.getElementById('heroHeader');
+    if (!header) return;
+    const images = [
+      'pic3.png',
+      'bed (3).jpg',
+      'pool (6).jpg',
+      'bed (2).jpg',
+      'garden.jpg',
+      'bar.jpg'
+    ];
+    let idx = 0;
+    images.forEach(s => { const i=new Image(); i.src=s; });
+    function setBg(i){ header.style.backgroundImage = `url("${images[i]}")`; header.style.backgroundSize='cover'; header.style.backgroundPosition='center'; }
+    setBg(idx);
+    setInterval(()=>{ idx=(idx+1)%images.length; setBg(idx); }, 4000);
+  })();
+
+</script>
+<style>
+.rates-table{
+width:100%;
+border-collapse:collapse;
+margin:30px 0;
+}
+.rates-table th,
+.rates-table td{
+border:1px solid #ccc;
+padding:10px;
+text-align:center;
+}
+
+.rates-table th{
+background:#f4f4f4;
+font-weight:600;
+}
+</style>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox(event)" style="cursor: pointer;">×</span>
+  <img id="lightbox-img" src="" alt="Enlarged View">
+</div>
+
+<!-- STICKY QUICK BOOK BUTTON -->
+<a href="https://wa.me/254734873704" target="_blank" class="sticky-book-btn" id="stickyBookBtn">📅 Quick Book</a>
+
+</body>
+</html>
